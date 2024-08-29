@@ -15,6 +15,7 @@ urlpatterns = [
 if settings.DEBUG:
     # newCod
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     schema_view = get_schema_view(
         openapi.Info(
             title="XCDM API",

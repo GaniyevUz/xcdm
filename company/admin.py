@@ -4,6 +4,8 @@ from django.db.models import TextField
 from django.utils.html import format_html, strip_tags
 from django_ckeditor_5.widgets import CKEditor5Widget
 from modeltranslation.admin import TranslationAdmin
+from ordered_model.admin import OrderedModelAdmin
+
 from .models import Category, Project, Blog, Faq, TeamCategory, TeamMember, TeamPosition
 from re import search
 
@@ -29,7 +31,7 @@ class ProjectAdmin(TranslationAdmin):
 
 @admin.register(Blog)
 class BlogAdmin(TranslationAdmin):
-    list_display = ['id', 'title', 'date', 'banner_image']
+    list_display = ['id', 'title', 'create_at', 'banner_image']
     formfield_overrides = {
         TextField: {'widget': CKEditor5Widget},
     }
@@ -49,8 +51,8 @@ class FaqAdmin(TranslationAdmin):
 
 
 @admin.register(TeamCategory)
-class TeamCategoryAdmin(TranslationAdmin):
-    list_display = ['id', 'title']
+class TeamCategoryAdmin(OrderedModelAdmin):
+    list_display = ['id', 'title', 'move_up_down_links']
 
 
 @admin.register(TeamPosition)
@@ -59,9 +61,9 @@ class TeamPositionAdmin(TranslationAdmin):
 
 
 @admin.register(TeamMember)
-class TeamMemberAdmin(ModelAdmin):
+class TeamMemberAdmin(OrderedModelAdmin):
     exclude = ('slug',)
-    list_display = ['id', 'full_name', 'image_html', 'position', 'linkedin_url']
+    list_display = ['id', 'full_name', 'image_html', 'position', 'linkedin_url', 'move_up_down_links']
     list_display_links = ('id', 'full_name')
     sortable_by = 'position', 'full_name'
 

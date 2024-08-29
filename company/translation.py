@@ -1,10 +1,10 @@
 from modeltranslation.translator import TranslationOptions, register, translator
-from .models import Project, Blog, Faq, TeamCategory,TeamPosition
+from .models import Project, Blog, Faq, TeamCategory, TeamPosition
 
 
 @register(Project)
 class ProjectTranslationOptions(TranslationOptions):
-    fields = ('title', 'type', 'description_short', 'project_type', 'preview', 'description_long')
+    fields = ('title', 'type', 'description_short',)
 
 
 @register(Blog)
